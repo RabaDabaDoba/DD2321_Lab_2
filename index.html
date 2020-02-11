@@ -1,22 +1,56 @@
-<html lang="en">
+<!doctype html>
 
-<head>
-    <meta charset="utf-8">
-    <!--<meta http-equiv="refresh" content="5" >
-    --><title>Test</title>
+<title>Linking to Data Table</title> 
+<!-- http://syntagmatic.github.com/parallel-coordinates/ -->
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.min.js"></script>
+<script src="d3.parcoords.js"></script>
+<script src="divgrid.js"></script>
 
-    <link rel="stylesheet" href="index.css">
+<div id="example" class="parcoords" style="background-color: blue;"></div>
+<div id="grid"></div>
 
-</head>
+<script id="brushing">// quantitative colour scale
+var green_to_blue = d3.scale.linear()
+  .domain([9, 50])
+  .range(["#7AC143", "#00B0DD"])
+  .interpolate(d3.interpolateLab);
 
-<body>
-    <p>This sucks</p>
-    <svg class="bar-chart"></svg>
-    <script src="https://d3js.org/d3.v5.js"></script>
-    <script src="index.js"></script>
-    
-    
-    
-</body>
+var color = function(d) { return green_to_blue(d['Length of Day (hours)']); };
 
-</html>
+var parcoords = d3.parcoords()("#example")
+  .color(color)
+  .alpha(0.4);
+
+// load csv file and create the chart
+d3.csv('planet.csv', function(data) {
+  parcoords
+    .data(data)
+    .render()
+    .brushMode("1D-axes");  // enable brushing
+
+  // create data table, row hover highlighting
+  var grid = d3.divgrid();
+  d3.select("#grid")
+    .datum(data.slice(0,10))
+    .call(grid)
+    .selectAll(".row")
+    .on({
+      "mouseover": function(d) { parcoords.highlight([d]) },
+      "mouseout": parcoords.unhighlight
+    });
+
+  // update data table on brush event
+  parcoords.on("brush", function(d) {
+    d3.select("#grid")
+      .datum(d.slice(0,10))
+      .call(grid)
+      .selectAll(".row")
+      .on({
+        "mouseover": function(d) { parcoords.highlight([d]) },
+        "mouseout": parcoords.unhighlight
+      });
+  });
+});
+</script>
