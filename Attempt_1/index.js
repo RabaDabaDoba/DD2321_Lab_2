@@ -66,7 +66,7 @@ function update() {
 //interact with this variable from a javascript console
 var pc0;
 
-d3.csv(, function(data) {
+d3.csv("planet.csv", function(data) {
 pc0 = d3.parcoords()("#example0")
   .data(data)
 	.bundlingStrength(0) // set bundling strength

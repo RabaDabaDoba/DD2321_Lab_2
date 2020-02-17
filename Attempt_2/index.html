@@ -1,0 +1,101 @@
+<!doctype html>
+
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>LAB 2 Website</title>
+
+        <script src="d3js.org/d3.v5.min.js"></script>
+        <script src="/cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+        <script src="/cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+        <script src="/datamaps.world.min.js"></script>
+
+
+
+        <link rel="icon" type="image/png" href="favicon.ico">
+        <script type="text/javascript" src="http://livejs.com/live.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+
+    <body>
+        <div class="w3-container w3-padding-small w3-theme-d3">
+            <div class="w3-right">
+
+            </div>
+        </div>
+
+        <div class="w3-bar w3-theme w3-xlarge">
+            <span class="w3-bar-item">Lab 2 - Visualizing the World</span>
+        </div>
+
+        <div class="w3-bar w3-theme">
+            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-white">Link 1</a>
+            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-white">Link 2</a>
+            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-white">Link 3</a>
+            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-white">Link 4</a>
+        </div>
+
+
+
+        <div id="centerDiv">
+            <div id="leftDiv" class="mdc-card">
+                <ul class="mdc-list">
+                    <li class="mdc-list-item" tabindex="0">
+                        <span class="mdc-list-item__text">Single-line item</span>
+                    </li>
+                    <li class="mdc-list-item">
+                        <span class="mdc-list-item__text">Single-line item</span>
+                    </li>
+                    <li class="mdc-list-item">
+                        <span class="mdc-list-item__text">Single-line item</span>
+                    </li>
+                </ul>
+            </div>
+            <div id="rightDiv">
+                <script>
+                    var map = new Datamap({
+                        element: document.getElementById('container'),
+                        fills: {
+                            HIGH: '#afafaf',
+                            LOW: '#123456',
+                            MEDIUM: 'blue',
+                            UNKNOWN: 'rgb(0,0,0)',
+                            defaultFill: 'green'
+                        },
+                        data: {
+                            IRL: {
+                                fillKey: 'LOW',
+                                numberOfThings: 2002
+                            },
+                            USA: {
+                                fillKey: 'MEDIUM',
+                                numberOfThings: 10381
+                            }
+                        },
+                        geographyConfig: {
+                            popupTemplate: function (geo, data) {
+                                return ['<div class="hoverinfo"><strong>',
+                                    'Number of things in ' + geo.properties.name,
+                                    ': ' + data.numberOfThings,
+                                    '</strong></div>'].join('');
+                            }
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+
+
+
+
+    </body>
+
+</html>

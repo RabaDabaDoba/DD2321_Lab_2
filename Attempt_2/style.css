@@ -1,0 +1,30 @@
+@import "@material/top-app-bar/mdc-top-app-bar";
+@import "@material/icon-button/mdc-icon-button";
+@import "@material/list/mdc-list";
+@import "@material/card/mdc-card";
+
+
+body {
+    font-size: 14px;
+    font-family: "Source Code Pro", Consolas, monaco, monospace;
+    margin: 20px auto 20px;
+    line-height: 1.45em;
+  }
+#leftDiv{
+    width: 20%;
+    float: left;
+    background-color: blue;
+}
+
+#rightDiv{
+    width: 80%;
+    min-width: 800px;
+    min-height: 200px;
+    float: right;
+    background-color: aqua;
+}
+
+.my-card {
+    height: 350px;
+    width: 350px;
+  }
